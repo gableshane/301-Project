@@ -7,9 +7,20 @@ header h1 {
   margin: 0 auto;
   font-size: 50px;
 }
-form {
-  margin-left: 40%;
+ul {
+  text-align: center;
 }
-input {
-  background-color: white;
+ul li {
+  display: inline-block;
+  padding: 1%;
+}
+footer {
+  position: fixed;
+  width: 100%;
+  border: 1px solid red;
+  bottom: 0;
+}
+#homeForm {
+  display: flex;
+  justify-content: center;  
 }

@@ -1,0 +1,13 @@
+input {
+  background-color: white;
+}
+nav {
+  padding: 1%;
+  text-align: left;
+}
+h1 {
+  padding-bottom: 1%;
+}
+#homeForm {
+  margin-top: 20%;
+}

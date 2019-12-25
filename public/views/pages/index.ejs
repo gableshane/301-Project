@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles/reset.css">
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/layout.css">
   <link rel="stylesheet" href="styles/modules.css">
@@ -10,17 +11,20 @@
 </head>
 <body>
   <header>
+    <%- include('../partials/nav.ejs') %>
     <h1>The Upside Down</h1>
   </header>
   <main>
-    <div>
+    <div id="homeForm">
       <form method="GET" action="/location">
         <label>Location:
-          <input type="text">
+          <input name="location" type="text" value="location">
+          <input type="submit" value="Find Out">
         </label>
       </form>
     </div>
   </main>
+  <%- include('../partials/footer.ejs') %>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="app.js"></script>
 </body>
