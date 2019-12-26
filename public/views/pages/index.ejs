@@ -12,9 +12,10 @@
 <body>
   <header>
     <%- include('../partials/nav.ejs') %>
-    <h1>The Upside Down</h1>
   </header>
   <main>
+    <div id="mainPage">
+    <h1 id="headline" class="upsideDown">The Upside Down</h1>
     <div id="homeForm">
       <form method="GET" action="/location">
         <label>Location:
@@ -23,8 +24,11 @@
         </label>
       </form>
     </div>
+  </div>
   </main>
+  <footer>
   <%- include('../partials/footer.ejs') %>
+  </footer>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="app.js"></script>
 </body>

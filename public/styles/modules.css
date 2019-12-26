@@ -1,13 +1,10 @@
 input {
   background-color: white;
 }
-nav {
-  padding: 1%;
-  text-align: left;
+.upsideDown {
+  transform: rotate(180deg);
 }
 h1 {
+  font-size: 50px;
   padding-bottom: 1%;
-}
-#homeForm {
-  margin-top: 20%;
 }
