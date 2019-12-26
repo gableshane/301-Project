@@ -20,10 +20,12 @@ app.use(methodOverride('_method'));
 const PORT = process.env.PORT || 3000;
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 const DATABASE_URL = process.env.DATABASE_URL;
+const CENSUS_API_KEY = process.env.CENSUS_API_KEY;
 
 // IMPORT MODULES
 const renderHome = require('./modules/home.js');
 const getMeme = require('./modules/getMeme.js');
+const getPoverty = require('./modules/poverty.js');
 
 // DATABASE
 const client = new pg.Client(`${DATABASE_URL}`);
@@ -34,6 +36,7 @@ client.connect();
 
 app.get('/', renderHome); // SHANE
 // app.get('/location', getLocation); // JOSHUA
+app.get('/poverty', getPoverty);
 app.get('/meme', getMeme); // SHANE
 // app.get('/restaurants', getRestaurants); // CRYSTAL
 // app.get('/crime', getCrime); // DAESY
