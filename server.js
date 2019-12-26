@@ -23,7 +23,7 @@ const DATABASE_URL = process.env.DATABASE_URL;
 
 // IMPORT MODULES
 const renderHome = require('./modules/home.js');
-const getAirQuality = require('./modules/airQuality.js');
+const getMeme = require('./modules/getMeme.js');
 
 // DATABASE
 const client = new pg.Client(`${DATABASE_URL}`);
@@ -34,7 +34,7 @@ client.connect();
 
 app.get('/', renderHome); // SHANE
 // app.get('/location', getLocation); // JOSHUA
-app.get('/airQuality', getAirQuality); // SHANE
+app.get('/meme', getMeme); // SHANE
 // app.get('/restaurants', getRestaurants); // CRYSTAL
 // app.get('/crime', getCrime); // DAESY
 

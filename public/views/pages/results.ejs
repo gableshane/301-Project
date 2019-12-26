@@ -10,13 +10,16 @@
   <title>Results</title>
 </head>
 <body>
+  <header>
+    <%- include('../partials/nav.ejs') %>
+    <h1>Results</h1>
+  </header>
   <main>
-    <header>
-      <%- include('../partials/nav.ejs') %>
-      <h1>Results</h1>
-    </header>
+    <img src="<%= img %>">
   </main>
+  <footer>
   <%- include('../partials/footer.ejs') %>
+  </footer>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="app.js"></script>
 </body>
