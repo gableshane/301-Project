@@ -26,6 +26,7 @@ const CENSUS_API_KEY = process.env.CENSUS_API_KEY;
 const renderHome = require('./modules/home.js');
 const getMeme = require('./modules/getMeme.js');
 const getPoverty = require('./modules/poverty.js');
+const getAirQuality = require('./modules/airQuality')
 
 // DATABASE
 const client = new pg.Client(`${DATABASE_URL}`);
@@ -36,6 +37,7 @@ client.connect();
 
 app.get('/', renderHome); // SHANE
 // app.get('/location', getLocation); // JOSHUA
+app.get('/airQuality', getAirQuality);
 app.get('/poverty', getPoverty);
 app.get('/meme', getMeme); // SHANE
 // app.get('/restaurants', getRestaurants); // CRYSTAL
