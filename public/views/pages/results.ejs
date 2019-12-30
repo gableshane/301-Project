@@ -15,15 +15,9 @@
     <h1>Results</h1>
   </header>
   <main>
-   <p>Yelp Review</p>
-   <ul>
-    <% yelpData.forEach(data => { %>
-      <% if (data !== undefined) { %>
-        <li><%= data.name %></li>
-        <li><%= data.rating %></li>
-      <% } %>
-    <% }) %>
-  </ul>
+    <h1><%= render.location %></h1>
+    <p><%= render.aqi %></p>
+    <p><%= render.aqiCategory %></p>
   </main>
   <footer>
   <%- include('../partials/footer.ejs') %>

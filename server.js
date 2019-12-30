@@ -27,8 +27,8 @@ const renderHome = require('./modules/home.js');
 const getMeme = require('./modules/getMeme.js');
 // const getPoverty = require('./modules/poverty.js');
 const getAirQuality = require('./modules/airQuality');
-// const getLocation = require('./modules/shanelocation');
-const getReviews = require('./modules/restaurants.js');
+const getLocation = require('./modules/shanelocation');
+const getReviews = require('./modules/restaurants');
 
 // DATABASE
 // const client = new pg.Client(`${DATABASE_URL}`);
@@ -37,12 +37,35 @@ const getReviews = require('./modules/restaurants.js');
 
 // ROUTES
 
-app.get('/', renderHome); // SHANE
-// app.get('/location', getLocation); // JOSHUA
-app.get('/airQuality', getAirQuality);
+// Promise.all()
+
+//FIX THIS!!!
+// app.get('/', renderHome); // SHANE
+// // app.get('/location', getLocation); // JOSHUA
+// app.get('/airQuality', getAirQuality);
+// // app.get('/poverty', getPoverty);
+// app.get('/meme', getMeme); // SHANE
+// app.get('/restaurants', getReviews); // CRYSTAL
+
+app.get('/location', ( req , res ) => {
+  getLocation( req , res ).then( returnLocation => {
+    getAirQuality.getAirQuality(returnLocation.location.lat, returnLocation.location.lng).then( aqData => {
+      let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name);
+      res.render('../public/views/pages/results.ejs', {render : render });
+    })
+  })
+});
+
+function Render(location, aqi, aqiCategory) {
+  this.location = location;
+  this.aqi = aqi;
+  this.aqiCategory = aqiCategory;
+}
+
+// app.get('/airQuality', getAirQuality);
 // app.get('/poverty', getPoverty);
-app.get('/meme', getMeme); // SHANE
-app.get('/restaurants', getReviews); // CRYSTAL
+// app.get('/meme', getMeme); // SHANE
+// app.get('/restaurants', getRestaurants); // CRYSTAL
 // app.get('/crime', getCrime); // DAESY
 
 // app.get('/results', (req, res) => {
