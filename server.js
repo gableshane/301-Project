@@ -1,10 +1,9 @@
 'use strict';
 // DEPENDENCIES
-const ejs = require('ejs');
-const pg = require('pg');
+// const ejs = require('ejs');
+// const pg = require('pg');
 const cors = require('cors');
 const express = require('express');
-const superagent = require('superagent');
 const app = express();
 
 const methodOverride = require('method-override');
@@ -19,36 +18,35 @@ app.use(methodOverride('_method'));
 
 // GLOBAL VARIABLES
 const PORT = process.env.PORT || 3000;
-const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
-const DATABASE_URL = process.env.DATABASE_URL;
-const CENSUS_API_KEY = process.env.CENSUS_API_KEY;
-
-const getReviews = require('./modules/restaurants.js');
+// const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
+// const DATABASE_URL = process.env.DATABASE_URL;
+// const CENSUS_API_KEY = process.env.CENSUS_API_KEY;
 
 // IMPORT MODULES
 const renderHome = require('./modules/home.js');
 const getMeme = require('./modules/getMeme.js');
-const getPoverty = require('./modules/poverty.js');
+// const getPoverty = require('./modules/poverty.js');
 const getAirQuality = require('./modules/airQuality');
-const getLocation = require('./modules/shanelocation');
+// const getLocation = require('./modules/shanelocation');
+const getReviews = require('./modules/restaurants.js');
 
 // DATABASE
-const client = new pg.Client(`${DATABASE_URL}`);
-client.on('error', error => console.error(error));
-client.connect();
+// const client = new pg.Client(`${DATABASE_URL}`);
+// client.on('error', error => console.error(error));
+// client.connect();
 
 // ROUTES
 
 app.get('/', renderHome); // SHANE
-app.get('/location', getLocation); // JOSHUA
+// app.get('/location', getLocation); // JOSHUA
 app.get('/airQuality', getAirQuality);
-app.get('/poverty', getPoverty);
+// app.get('/poverty', getPoverty);
 app.get('/meme', getMeme); // SHANE
 app.get('/restaurants', getReviews); // CRYSTAL
 // app.get('/crime', getCrime); // DAESY
 
 
 // SERVER LISTENS
-app.listen(3000, () => {
-  console.log('listening on port 3000');
+app.listen(PORT, () => {
+  console.log(`listening on ${PORT}`);
 });
