@@ -15,7 +15,7 @@ function Yelp(name, image_url, price, rating, url) {
 const getReviews = function(request, response) {
   // const url = `https://api.yelp.com/v3/businesses/search?latitude=${request.query.data.latitude}&longitude=${request.query.data.longitude}`;
   // const url = 'https://api.yelp.com/v3/businesses/search?location=bellevue&limit=50&offset=901';
-  
+
   const url = 'https://api.yelp.com/v3/businesses/dxNm-lRgIxN96pEn1OJSlQ/reviews';
   superagent.get(url).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).then(data => {
     const parsedData = JSON.parse(data.text);
@@ -30,12 +30,12 @@ const getReviews = function(request, response) {
       }
     }
     const yelpData = parsedData.businesses.map(business => {
-        const name = business.name;
-        const image_url = business.image_url;
-        const price = business.price;
-        const rating = business.rating;
-        const url = business.url;
-        return new Yelp(name, image_url, price, rating, url);
+      const name = business.name;
+      const image_url = business.image_url;
+      const price = business.price;
+      const rating = business.rating;
+      const url = business.url;
+      return new Yelp(name, image_url, price, rating, url);
     })
     // console.log('yelpData :', yelpData);
     response.status(200).send(yelpData);
