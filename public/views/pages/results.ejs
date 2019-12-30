@@ -15,9 +15,15 @@
     <h1>Results</h1>
   </header>
   <main>
-   <!-- <img src="">  src=" EJS= img EJS" -->
-   <!-- <p></p> p text = EJS= poverty.name + ' ' + poverty.povPop EJS` -->
-   <p>Air Quality = <%= airQuality.AQI + ' ' + airQuality.Category.Name %></p>
+   <p>Yelp Review</p>
+   <ul>
+    <% yelpData.forEach(data => { %>
+      <% if (data !== undefined) { %>
+        <li><%= data.name %></li>
+        <li><%= data.rating %></li>
+      <% } %>
+    <% }) %>
+  </ul>
   </main>
   <footer>
   <%- include('../partials/footer.ejs') %>

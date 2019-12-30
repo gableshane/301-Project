@@ -45,6 +45,10 @@ app.get('/meme', getMeme); // SHANE
 app.get('/restaurants', getReviews); // CRYSTAL
 // app.get('/crime', getCrime); // DAESY
 
+// app.get('/results', (req, res) => {
+//   res.render('../public/views/pages/results');
+// });
+
 
 // SERVER LISTENS
 app.listen(PORT, () => {
