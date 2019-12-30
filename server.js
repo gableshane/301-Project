@@ -36,11 +36,27 @@ client.connect();
 
 // ROUTES
 
+// Promise.all()
+
 app.get('/', renderHome); // SHANE
-app.get('/location', getLocation); // JOSHUA
-app.get('/airQuality', getAirQuality);
-app.get('/poverty', getPoverty);
-app.get('/meme', getMeme); // SHANE
+app.get('/location', ( req , res ) => {
+  getLocation( req , res ).then( returnLocation => {
+    getAirQuality.getAirQuality(returnLocation.location.lat, returnLocation.location.lng).then( aqData => {
+      let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name);
+      res.render('../public/views/pages/results.ejs', {render : render });
+    })
+  })
+});
+
+function Render(location, aqi, aqiCategory) {
+  this.location = location;
+  this.aqi = aqi;
+  this.aqiCategory = aqiCategory;
+}
+
+// app.get('/airQuality', getAirQuality);
+// app.get('/poverty', getPoverty);
+// app.get('/meme', getMeme); // SHANE
 // app.get('/restaurants', getRestaurants); // CRYSTAL
 // app.get('/crime', getCrime); // DAESY
 
