@@ -4,15 +4,23 @@
 const superagent = require('superagent');
 require('dotenv').config();
 
-const getReviews = {}
+// function Yelp(name, yelp_id, image_url, price, rating) {
+//   this.name = name;
+//   this.yelp_id = yelp_id;
+//   this.image_url = image_url;
+//   this.price = price;
+//   this.rating = rating;
+// }
 
-getReviews.getReviews = function(lat, long) {
-  const url = `https://api.yelp.com/v3/businesses/search?latitude=${lat}&longitude=${long}`;
-  // const seattle_url = 'https://api.yelp.com/v3/businesses/search?location=seattle&limit=50&offset=101';
+const getReviews = {};
 
-  superagent.get(url).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).then(data => {
+getReviews.getReviews = function(latitude, longitude) {
+  const url = `https://api.yelp.com/v3/businesses/search?latitude=${latitude}&longitude=${longitude}&limit=50&offset=101`;
+  // const url = 'https://api.yelp.com/v3/businesses/search?location=seattle&limit=50&offset=101';
+
+  return superagent.get(url).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).then(data => {
     const parsedData = JSON.parse(data.text);
-    console.log('LENGTH :', parsedData.businesses.length);
+    // console.log('LENGTH :', parsedData.businesses.length);
     const yelpData = parsedData.businesses.map(business => {
       if (parseInt(business.rating) < 3.1) {
         console.log(business.name);
@@ -22,24 +30,12 @@ getReviews.getReviews = function(lat, long) {
         getReviews.image_url = business.image_url;
         getReviews.price = business.price;
         getReviews.rating = business.rating;
+        return getReviews;
       }
     })
     console.log('yelpData :', yelpData);
-    // response.render('../public/views/pages/results', { yelpData : yelpData });
   })
 };
 
+
 module.exports = getReviews;
-
-
-// <!-- FIX -->
-// <p>Yelp Review</p>
-// <ul>
-//  <% yelpData.forEach(data => { %>
-//    <% if (data !== undefined) { %>
-//      <li><%= data.name %></li>
-//      <li><%= data.rating %></li>
-//    <% } %>
-//  <% }) %>
-// </ul>
-// <!-- FIX -->

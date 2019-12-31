@@ -39,22 +39,33 @@ const getReviews = require('./modules/restaurants');
 
 // Promise.all()
 
-//FIX THIS!!!
-// app.get('/', renderHome); // SHANE
-// // app.get('/location', getLocation); // JOSHUA
-// app.get('/airQuality', getAirQuality);
-// // app.get('/poverty', getPoverty);
-// app.get('/meme', getMeme); // SHANE
-// app.get('/restaurants', getReviews); // CRYSTAL
+app.get('/', renderHome); // SHANE
 
 app.get('/location', ( req , res ) => {
   getLocation( req , res ).then( returnLocation => {
-    getAirQuality.getAirQuality(returnLocation.location.lat, returnLocation.location.lng).then( aqData => {
-      let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name);
-      res.render('../public/views/pages/results.ejs', {render : render });
-    })
+    displayAirQual(returnLocation, res);
+    // disaplyRestaurantReivews(returnLocation, res);
   })
 });
+
+function displayAirQual(locationData, res) {
+  getAirQuality.getAirQuality(locationData.location.lat, locationData.location.lng).then( aqData => {
+    console.log('******aqData :', aqData);
+    let renderData = new Render(locationData.name, aqData.data.AQI, aqData.data.Category.Name);
+    console.log('******renderData :', renderData);
+    res.render('../public/views/pages/results.ejs', { render : renderData });
+  })
+}
+
+function disaplyRestaurantReivews(locationData, res) {
+  // console.log('**??????? :', getReviews(locationData.location.lat, locationData.location.lng));
+  getReviews.getReviews(locationData.location.lat, locationData.location.lng).then( data => {
+    console.log('******data :', data);
+    // let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name);
+    res.render('../public/views/pages/results.ejs');
+  })
+}
+
 
 function Render(location, aqi, aqiCategory) {
   this.location = location;
