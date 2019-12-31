@@ -30,6 +30,7 @@ const getAirQuality = require('./modules/airQuality');
 const getLocation = require('./modules/shanelocation');
 const getReviews = require('./modules/restaurants');
 
+
 // DATABASE
 // const client = new pg.Client(`${DATABASE_URL}`);
 // client.on('error', error => console.error(error));
@@ -43,50 +44,24 @@ app.get('/', renderHome); // SHANE
 
 app.get('/location', ( req , res ) => {
   getLocation( req , res ).then( returnLocation => {
-    Promise.all([
-      displayAirQual(returnLocation),
-      disaplyRestaurantReivews(returnLocation)
-    ]).then(([render, yelpData]) => {
-      res.render('../public/views/pages/results.ejs', {render: render, yelpData: yelpData});
+    getAirQuality.getAirQuality(returnLocation.location.lat, returnLocation.location.lng).then( aqData => {
+      getReviews.getReviews(returnLocation.location.lat, returnLocation.location.lng).then( reviews => {
+        console.log(reviews);
+        let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews);
+        res.render('../public/views/pages/results.ejs', {render : render });
+      })
     })
 
   })
 });
 
-function displayAirQual(locationData) {
-  return getAirQuality.getAirQuality(locationData.location.lat, locationData.location.lng).then( aqData => {
-    // console.log('******aqData :', aqData);
-    let render = new Render(locationData.name, aqData.data.AQI, aqData.data.Category.Name);
-    console.log('******renderData :', render);
-    return render;
-  })
-}
-
-function disaplyRestaurantReivews(locationData) {
-  return getReviews.getReviews(locationData.location.lat, locationData.location.lng).then( data => {
-    // console.log('******data :', data);
-    let yelpData = data.map(restaurant => {
-      return new Yelp(restaurant.name, restaurant.id, restaurant.image_url, restaurant.price, restaurant.rating);
-    })
-    return yelpData;
-    // console.log('******yelpData :', yelpData);
-  })
-}
-
-
-function Render(location, aqi, aqiCategory) {
+function Render(location, aqi, aqiCategory, yelpData) {
   this.location = location;
   this.aqi = aqi;
   this.aqiCategory = aqiCategory;
+  this.yelpData = yelpData;
 }
 
-function Yelp(name, yelp_id, image_url, price, rating) {
-  this.name = name;
-  this.yelp_id = yelp_id;
-  this.image_url = image_url;
-  this.price = price;
-  this.rating = rating;
-}
 
 // app.get('/airQuality', getAirQuality);
 // app.get('/poverty', getPoverty);
