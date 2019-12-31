@@ -12,7 +12,7 @@ require('dotenv').config();
 //   this.rating = rating;
 // }
 
-const getReviews = {};
+const getReviews = [];
 
 getReviews.getReviews = function(latitude, longitude) {
   const url = `https://api.yelp.com/v3/businesses/search?latitude=${latitude}&longitude=${longitude}&limit=50&offset=101`;
@@ -21,21 +21,26 @@ getReviews.getReviews = function(latitude, longitude) {
   return superagent.get(url).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).then(data => {
     const parsedData = JSON.parse(data.text);
     // console.log('LENGTH :', parsedData.businesses.length);
-    const yelpData = parsedData.businesses.map(business => {
+    parsedData.businesses.map(business => {
       if (parseInt(business.rating) < 3.1) {
-        console.log(business.name);
-        console.log(parseInt(business.rating));
-        getReviews.name = business.name;
-        getReviews.yelp_id = business.id;
-        getReviews.image_url = business.image_url;
-        getReviews.price = business.price;
-        getReviews.rating = business.rating;
-        return getReviews;
+        // console.log(business.name);
+        // console.log(parseInt(business.rating));
+        getReviews.push(business);
       }
     })
-    console.log('yelpData :', yelpData);
+    return getReviews;
+    // console.log('yelpData :', yelpData);
   })
 };
 
+{/* <ul>
+<% yelpData.forEach(review => { %>
+  <div>
+    <li><img src="<%= review.image_url %>" alt="yelp image" height="100" width="100" ></li>
+    <li><h2><%= review.name %></h2></li>
+    <li><p><%= review.rating %></p></li>
+  </div>
+<% }) %>
+</ul> */}
 
 module.exports = getReviews;

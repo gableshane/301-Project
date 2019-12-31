@@ -15,10 +15,20 @@
     <h1>Results</h1>
   </header>
   <main>
+    <h2>Air Quality results</h2>
     <h1><%= render.location %></h1>
     <p><%= render.aqi %></p>
     <p><%= render.aqiCategory %></p>
-
+    <h2>Yelp results</h2>
+    <ul>
+      <% yelpData.forEach(review => { %>
+        <div>
+          <li><img src="<%= review.image_url %>" alt="yelp image" height="100" width="100" ></li>
+          <li><h2><%= review.name %></h2></li>
+          <li><p><%= review.rating %></p></li>
+        </div>
+      <% }) %>
+    </ul>
   </main>
   <footer>
   <%- include('../partials/footer.ejs') %>
