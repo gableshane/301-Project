@@ -15,6 +15,7 @@
     <h1>Results</h1>
   </header>
   <main>
+    <h2>Air Quality results</h2>
     <h1><%= render.location %></h1>
     <p><%= render.aqi %></p>
     <p><%= render.aqiCategory %></p>
@@ -26,7 +27,17 @@
           <li><p><%= review.rating %></p></li>
         </div>
       <% }) %>
-      </ul>
+    </ul>
+    <h2>Crime results (show first 10)</h2>
+    <% console.log(render.crimeData) %>
+    <ul>
+      <% for (let i = 0; i < 10; i++) { %>
+        <div>
+          <li>Crime: <%= render.crimeData[i].crime_description %></li>
+          <li>Neighborhood: <%= render.crimeData[i].neighborhood %></li>
+        </div>
+      <% } %>
+    </ul>
   </main>
   <footer>
   <%- include('../partials/footer.ejs') %>

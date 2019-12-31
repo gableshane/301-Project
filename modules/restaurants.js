@@ -3,16 +3,8 @@
 const superagent = require('superagent');
 require('dotenv').config();
 
-// function Yelp(name, yelp_id, image_url, price, rating) {
-//   this.name = name;
-//   this.yelp_id = yelp_id;
-//   this.image_url = image_url;
-//   this.price = price;
-//   this.rating = rating;
-// }
 
 const getReviews = {};
-
 
 getReviews.getReviews = function(latitude, longitude) {
   getReviews.data = [];
@@ -34,15 +26,5 @@ getReviews.getReviews = function(latitude, longitude) {
   })
 };
 
-{/* <ul>
-<% yelpData.forEach(review => { %>
-  <div>
-    <li><img src="<%= review.image_url %>" alt="yelp image" height="100" width="100" ></li>
-    <li><h2><%= review.name %></h2></li>
-    <li><p><%= review.rating %></p></li>
-  </div>
-<% }) %>
-</ul> */}
 
 module.exports = getReviews;
-
