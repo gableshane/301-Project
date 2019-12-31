@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 3000;
 
 // IMPORT MODULES
 const renderHome = require('./modules/home.js');
-const getMeme = require('./modules/getMeme.js');
+// const getMeme = require('./modules/getMeme.js');
 // const getPoverty = require('./modules/poverty.js');
 const getAirQuality = require('./modules/airQuality');
 const getLocation = require('./modules/shanelocation');
