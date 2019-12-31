@@ -5,10 +5,12 @@
 
 const superagent = require('superagent');
 
-// CREATE CRIME DATA CONSTRUCTOR
 
-function getCrime(req, res){
-  superagent.get(`https://data.seattle.gov/resource/4fs7-3vj5.json`).then(response => {
+const getCrime = {};
+
+getCrime.getCrime = function(){
+  console.log('-----------getCrime!!');
+  return superagent.get(`https://data.seattle.gov/resource/4fs7-3vj5.json`).then(response => {
     const allCrimes = JSON.parse(response.text);
     let sortedCrimes = allCrimes.reverse();
     const allData = sortedCrimes.map(event => {
@@ -19,8 +21,9 @@ function getCrime(req, res){
         'neighborhood': afterSlash(event.neighborhood),
       };
     });
-    console.log('-----------allData :', allData);
-    res.render('index', {allCrimes: allData} )
+    return allData;
+    // console.log('-----------allData :', allData);
+    // res.render('index', {allCrimes: allData} )
   });
 }
 
