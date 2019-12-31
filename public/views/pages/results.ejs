@@ -19,25 +19,15 @@
     <h1><%= render.location %></h1>
     <p><%= render.aqi %></p>
     <p><%= render.aqiCategory %></p>
-<<<<<<< HEAD
-    <h2>Yelp results</h2>
-    <ul>
-      <% yelpData.forEach(review => { %>
-=======
     <ul>
       <% render.yelpData.forEach(review => { %>
->>>>>>> 9a2f0aee62d541d648471fcc42f1a718634e91aa
         <div>
           <li><img src="<%= review.image_url %>" alt="yelp image" height="100" width="100" ></li>
           <li><h2><%= review.name %></h2></li>
           <li><p><%= review.rating %></p></li>
         </div>
       <% }) %>
-<<<<<<< HEAD
-    </ul>
-=======
       </ul>
->>>>>>> 9a2f0aee62d541d648471fcc42f1a718634e91aa
   </main>
   <footer>
   <%- include('../partials/footer.ejs') %>

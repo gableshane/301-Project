@@ -29,6 +29,7 @@ const getMeme = require('./modules/getMeme.js');
 const getAirQuality = require('./modules/airQuality');
 const getLocation = require('./modules/shanelocation');
 const getReviews = require('./modules/restaurants');
+const getCrime = require('./modules/crime');
 
 
 // DATABASE
@@ -48,7 +49,7 @@ app.get('/location', ( req , res ) => {
       getReviews.getReviews(returnLocation.location.lat, returnLocation.location.lng).then( reviews => {
         console.log(reviews);
         let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews);
-        res.render('../public/views/pages/results.ejs', {render : render });
+        res.render('../public/views/pages/results.ejs', { render : render });
       })
     })
 
