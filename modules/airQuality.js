@@ -4,7 +4,7 @@ const superagent = require('superagent');
 
 const AQ_API_KEY = process.env.AQ_API_KEY;
 
-const getAirQuality = {}
+const getAirQuality = {};
 
 getAirQuality.getAirQuality = function ( lat , lng ) {
   console.log('-----------getAirQuality!!');

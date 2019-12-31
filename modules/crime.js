@@ -1,9 +1,12 @@
+
 // DAESY
+
 'use strict';
 
 const superagent = require('superagent');
 
 // CREATE CRIME DATA CONSTRUCTOR
+
 function getCrime(req, res){
   superagent.get(`https://data.seattle.gov/resource/4fs7-3vj5.json`).then(response => {
     const allCrimes = JSON.parse(response.text);
@@ -21,6 +24,7 @@ function getCrime(req, res){
   });
 }
 
+
 function afterSlash(value){
   let valueIndex = value.indexOf('/');
   let beforeSlash = '';
@@ -32,6 +36,7 @@ function afterSlash(value){
   }
   return beforeSlash;
 }
+
 
 function removeYear(value){
   return value.slice(0, -4);

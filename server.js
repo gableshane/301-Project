@@ -31,7 +31,6 @@ const getLocation = require('./modules/shanelocation');
 const getReviews = require('./modules/restaurants');
 const getCrime = require('./modules/crime');
 
-
 // DATABASE
 // const client = new pg.Client(`${DATABASE_URL}`);
 // client.on('error', error => console.error(error));
