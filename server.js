@@ -28,6 +28,7 @@ const getMeme = require('./modules/getMeme.js');
 const getPoverty = require('./modules/poverty.js');
 const getAirQuality = require('./modules/airQuality');
 const getLocation = require('./modules/shanelocation');
+const getReviews = require('./modules/restaurants.js');
 
 // DATABASE
 const client = new pg.Client(`${DATABASE_URL}`);
@@ -42,16 +43,20 @@ app.get('/', renderHome); // SHANE
 app.get('/location', ( req , res ) => {
   getLocation( req , res ).then( returnLocation => {
     getAirQuality.getAirQuality(returnLocation.location.lat, returnLocation.location.lng).then( aqData => {
-      let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name);
-      res.render('../public/views/pages/results.ejs', {render : render });
+      getReviews.getReviews(returnLocation.location.lat, returnLocation.location.lng).then( reviews => {
+        console.log(reviews);
+        let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews);
+        res.render('../public/views/pages/results.ejs', {render : render });
+      })
     })
   })
 });
 
-function Render(location, aqi, aqiCategory) {
+function Render(location, aqi, aqiCategory, yelpData) {
   this.location = location;
   this.aqi = aqi;
   this.aqiCategory = aqiCategory;
+  this.yelpData = yelpData;
 }
 
 // app.get('/airQuality', getAirQuality);
