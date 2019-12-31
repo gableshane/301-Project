@@ -4,7 +4,7 @@ const superagent = require('superagent');
 
 const AQ_API_KEY = process.env.AQ_API_KEY;
 
-const getAirQuality = {}
+const getAirQuality = {};
 
 getAirQuality.getAirQuality = function ( lat , lng ) {
   return superagent.get(`http://www.airnowapi.org/aq/observation/latLong/current/?format=application/json&latitude=${lat}&longitude=${lng}&distance=50&API_KEY=${AQ_API_KEY}`).then( aqData => {

@@ -11,9 +11,11 @@ require('dotenv').config();
 //   this.rating = rating;
 // }
 
-const getReviews = [];
+const getReviews = {};
+
 
 getReviews.getReviews = function(latitude, longitude) {
+  getReviews.data = [];
   const url = `https://api.yelp.com/v3/businesses/search?latitude=${latitude}&longitude=${longitude}&limit=50&offset=101`;
   // const url = 'https://api.yelp.com/v3/businesses/search?location=seattle&limit=50&offset=101';
 
@@ -24,7 +26,7 @@ getReviews.getReviews = function(latitude, longitude) {
       if (parseInt(business.rating) < 3.1) {
         // console.log(business.name);
         // console.log(parseInt(business.rating));
-        getReviews.push(business);
+        getReviews.data.push(business);
       }
     })
     return getReviews;
@@ -43,3 +45,4 @@ getReviews.getReviews = function(latitude, longitude) {
 </ul> */}
 
 module.exports = getReviews;
+
