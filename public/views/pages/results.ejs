@@ -18,6 +18,15 @@
     <h1><%= render.location %></h1>
     <p><%= render.aqi %></p>
     <p><%= render.aqiCategory %></p>
+    <ul>
+      <% render.yelpData.forEach(review => { %>
+        <div>
+          <li><img src="<%= review.image_url %>" alt="yelp image" height="100" width="100" ></li>
+          <li><h2><%= review.name %></h2></li>
+          <li><p><%= review.rating %></p></li>
+        </div>
+      <% }) %>
+      </ul>
   </main>
   <footer>
   <%- include('../partials/footer.ejs') %>
