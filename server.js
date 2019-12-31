@@ -29,6 +29,7 @@ const getPoverty = require('./modules/poverty.js');
 const getAirQuality = require('./modules/airQuality');
 const getLocation = require('./modules/shanelocation');
 const getReviews = require('./modules/restaurants.js');
+// const getCrime = require('./modules/crime.js');
 
 // DATABASE
 const client = new pg.Client(`${DATABASE_URL}`);
@@ -44,8 +45,9 @@ app.get('/location', ( req , res ) => {
   getLocation( req , res ).then( returnLocation => {
     getAirQuality.getAirQuality(returnLocation.location.lat, returnLocation.location.lng).then( aqData => {
       getReviews.getReviews(returnLocation.location.lat, returnLocation.location.lng).then( reviews => {
-        console.log(reviews);
-        let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews);
+        let render;
+        render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews.data);
+        console.log(reviews.data.length);
         res.render('../public/views/pages/results.ejs', {render : render });
       })
     })
