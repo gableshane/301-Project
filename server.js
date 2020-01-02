@@ -37,7 +37,7 @@ app.get('/location', ( req , res ) => {
         getCrime.getCrime().then(seattleCrimeData => {
           mapDisplay.mapDisplay(returnLocation.location.lat, returnLocation.location.lng).then( mapData => {
             // console.log('-----------seattleCrimeData :', seattleCrimeData);
-            let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews.data, seattleCrimeData, mapData);
+            let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews.data, seattleCrimeData, mapData, getLocation.username);
             res.render('../public/views/pages/results.ejs', { render : render });
           })
         })
@@ -47,13 +47,14 @@ app.get('/location', ( req , res ) => {
 });
 
 
-function Render(location, aqi, aqiCategory, yelpData, crimeData, mapData) {
+function Render(location, aqi, aqiCategory, yelpData, crimeData, mapData, username) {
   this.location = location;
   this.aqi = aqi;
   this.aqiCategory = aqiCategory;
   this.yelpData = yelpData;
   this.crimeData = crimeData;
   this.mapData = mapData;
+  this.username = username;
 }
 
 // SERVER LISTENS
