@@ -47,38 +47,43 @@ input[type=submit] {
 }
 
   
-  #mainPage {
+#mainPage {
       positon: relative;
       margin: 10% 0% 0% 0%;
       padding: 5%;
       border: 0%;
       background-color: black;
   
-  }
+}
     
-  #nav {
+#nav {
       position: relative;
       margin: 0% 0% 0% 0% ;
       padding: 0%;
       font-size: 5em;
      
       
-  }
+}
     
-  header {
+header {
       position: relative;
       font-size: 1em;
       background-color: red;
       margin: 0% 0% 0% 0%;
-      padding: 0%;
+      padding: 1%;
       bottom: 290px;
-  }
+}
   
-  footer {
+footer {
     position: relative;
     background: black;
     height: 9%;
     font-size: 3em;
     padding: 0%;
     margin: 0 0 0 0 ;
-  }
+}
+
+ul {
+    position: relative;
+    padding: 1%;
+}
