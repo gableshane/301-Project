@@ -8,7 +8,7 @@ const getReviews = {};
 
 getReviews.getReviews = function(latitude, longitude) {
   getReviews.data = [];
-  const url = `https://api.yelp.com/v3/businesses/search?latitude=${latitude}&longitude=${longitude}&limit=50&offset=901`;
+  const url = `https://api.yelp.com/v3/businesses/search?latitude=${latitude}&longitude=${longitude}&limit=50&offset=101`;
   // const url = 'https://api.yelp.com/v3/businesses/search?location=seattle&limit=50&offset=101';
 
   return superagent.get(url).set('Authorization', `Bearer ${process.env.YELP_API_KEY}`).then(data => {

@@ -22,7 +22,6 @@ getLocation.getLocation = async function getLocation( req , res ) {
   let userId;
   let query = req.query.location;
   let userName = req.query.name;
-  getLocation.username = username;
   let queryUsers = 'SELECT * FROM users WHERE name=$1';
   let queryLocations = 'SELECT * FROM locations WHERE searchquery=$1 AND user_id=$2';
   const data = await client.query( queryUsers , [userName] );

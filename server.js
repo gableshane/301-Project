@@ -31,13 +31,13 @@ const mapDisplay = require('./modules/map');
 app.get('/', renderHome); // SHANE
 
 app.get('/location', ( req , res ) => {
+  let userName = req.query.name;
   getLocation.getLocation( req , res ).then( returnLocation => {
     getAirQuality.getAirQuality(returnLocation.location.lat, returnLocation.location.lng).then( aqData => {
       getReviews.getReviews(returnLocation.location.lat, returnLocation.location.lng).then( reviews => {
         getCrime.getCrime().then(seattleCrimeData => {
           mapDisplay.mapDisplay(returnLocation.location.lat, returnLocation.location.lng).then( mapData => {
-            // console.log('-----------seattleCrimeData :', seattleCrimeData);
-            let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews.data, seattleCrimeData, mapData, getLocation.username);
+            let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews.data, seattleCrimeData, mapData, userName);
             res.render('../public/views/pages/results.ejs', { render : render });
           })
         })
