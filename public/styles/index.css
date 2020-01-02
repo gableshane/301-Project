@@ -1,6 +1,3 @@
-
-
-
 body {
   /* position: relative; */
   font-family: 'Shadows Into Light', cursive;
@@ -81,4 +78,104 @@ input[type=submit] {
     font-size: 3em;
     padding: 0%;
     margin: 0 0 0 0 ;
+  }
+
+  @media screen and (max-width: 750px) {
+
+    body {
+      /* position: relative; */
+      font-family: 'Shadows Into Light', cursive;
+      background-image: url(pictures/jokerdriving.gif);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-positon: center center;
+      height: 100%;
+      width: 100%;
+      font-color: rgb(0, 255, 13);
+      color: rgb(21, 255, 0);
+      margin: 30% 0% 0% 0%;
+      padding: 0%;
+      background-color: rgb(0, 0, 0);
+     
+      }
+      
+    label {
+      position: relative;
+      font-size: 2em;
+      maring: 0% 0% 0% 0%;
+      padding: 0%;
+      top: 225px;
+    }
+    
+    input {
+      position: relative;
+      font-size: .5em;
+      width: 10%;
+      height: 10%;
+      top: 0px;
+    }
+    
+    #headline {
+      position: relative;
+      font-size: 4em;
+      margin: 0 0 0 0;
+      padding: 0;
+      top: 200px;
+    }
+    
+    input[type=submit] {
+      position: relative;
+      width: 15%;
+      height: 15%;
+      font-size: 2em;
+      top: 225px;
+    }
+    
+      
+      #mainPage {
+          positon: relative;
+          margin: 10% 0% 0% 0%;
+          padding: 2%;
+          border: 0%;
+          background-color: rgb(0, 0, 0);
+      
+      }
+        
+      #nav {
+          position: relative;
+          margin: 0% 0% 0% 0% ;
+          padding: 0%;
+          font-size: 10em;
+          top: -10px;
+          font-color: green;
+          color: green;
+         
+          
+      }
+
+      span {
+        position: relative;
+        font-color: rgb(55, 79, 160);
+        color: rgb(54, 68, 129);
+      }
+        
+      header {
+          position: relative;
+          font-size: 1em;
+          background-color: rgb(21, 255, 0);
+          margin: 0% 0% 0% 0%;
+          padding: 0%;
+          top: 250px;
+      }
+      
+      footer {
+        position: relative;
+        background: rgb(0, 0, 0);
+        height: 9%;
+        font-size: 2em;
+        padding: 0%;
+        margin: 0 0 0 0 ;
+      }
+
+
   }

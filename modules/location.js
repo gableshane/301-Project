@@ -10,6 +10,8 @@ require('dotenv').config();
 // client.on('error', error => console.error(error));
 // client.connect();
 
+
+
 function Location(city, geoData){
   this.search_query = city;
   this.formatted_query = geoData.formatted_address;
