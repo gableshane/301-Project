@@ -31,7 +31,7 @@ const mapDisplay = require('./modules/map');
 app.get('/', renderHome); // SHANE
 
 app.get('/location', ( req , res ) => {
-  getLocation( req , res ).then( returnLocation => {
+  getLocation.getLocation( req , res ).then( returnLocation => {
     getAirQuality.getAirQuality(returnLocation.location.lat, returnLocation.location.lng).then( aqData => {
       getReviews.getReviews(returnLocation.location.lat, returnLocation.location.lng).then( reviews => {
         getCrime.getCrime().then(seattleCrimeData => {

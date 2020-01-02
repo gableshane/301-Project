@@ -7,6 +7,7 @@ const pg = require('pg');
 // GLOBAL VARIABLES
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 const DATABASE_URL = process.env.DATABASE_URL;
+const getLocation = {};
 
 // DATABASE
 const client = new pg.Client(`${DATABASE_URL}`);
@@ -15,12 +16,13 @@ client.connect();
 
 
 
-async function getLocation( req , res ) {
+getLocation.getLocation = async function getLocation( req , res ) {
   // console.log('-------------------get location!');
   let locationData = {};
   let userId;
   let query = req.query.location;
   let userName = req.query.name;
+  getLocation.username = username;
   let queryUsers = 'SELECT * FROM users WHERE name=$1';
   let queryLocations = 'SELECT * FROM locations WHERE searchquery=$1 AND user_id=$2';
   const data = await client.query( queryUsers , [userName] );
