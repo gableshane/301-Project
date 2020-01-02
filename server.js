@@ -23,6 +23,8 @@ const getAirQuality = require('./modules/airQuality');
 const getLocation = require('./modules/location');
 const getReviews = require('./modules/restaurants');
 const getCrime = require('./modules/crime');
+const mapDisplay = require('./modules/map');
+
 
 // ROUTES
 
@@ -33,23 +35,25 @@ app.get('/location', ( req , res ) => {
     getAirQuality.getAirQuality(returnLocation.location.lat, returnLocation.location.lng).then( aqData => {
       getReviews.getReviews(returnLocation.location.lat, returnLocation.location.lng).then( reviews => {
         getCrime.getCrime().then(seattleCrimeData => {
-          console.log('-----------seattleCrimeData');
-          let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews.data, seattleCrimeData);
-          res.render('../public/views/pages/results.ejs', { render : render });
+          mapDisplay.mapDisplay(returnLocation.location.lat, returnLocation.location.lng).then( mapData => {
+            // console.log('-----------seattleCrimeData :', seattleCrimeData);
+            let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews.data, seattleCrimeData, mapData);
+            res.render('../public/views/pages/results.ejs', { render : render });
+          })
         })
       })
     })
-
   })
 });
 
-// CONSTRUCTOR FOR RENDER OBJECT
-function Render(location, aqi, aqiCategory, yelpData, crimeData) {
+
+function Render(location, aqi, aqiCategory, yelpData, crimeData, mapData) {
   this.location = location;
   this.aqi = aqi;
   this.aqiCategory = aqiCategory;
   this.yelpData = yelpData;
   this.crimeData = crimeData;
+  this.mapData = mapData;
 }
 
 // SERVER LISTENS

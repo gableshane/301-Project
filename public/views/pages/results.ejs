@@ -20,8 +20,7 @@
     <h1><%= render.location %></h1>
     <div id="map-and-air-container">
       <div id="map-container">
-        <!-- API key need to be removed -->
-        <img src="https://maps.googleapis.com/maps/api/staticmap?center=seattle&zoom=13&size=600x300&maptype=roadmap&key=AIzaSyCISg1U61yr8wgD6vDSb9iOGydUd48KZvI" alt="google map">
+        <img src="<%= render.mapData.url %>">
       </div>
       <div id="air-quality-container">
         <h2 class="title">Air Quality Results</h2>
