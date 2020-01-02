@@ -3,6 +3,7 @@
 const superagent = require('superagent');
 const pg = require('pg');
 
+
 // GLOBAL VARIABLES
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -11,6 +12,7 @@ const DATABASE_URL = process.env.DATABASE_URL;
 const client = new pg.Client(`${DATABASE_URL}`);
 client.on('error', error => console.error(error));
 client.connect();
+
 
 
 async function getLocation( req , res ) {
