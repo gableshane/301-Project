@@ -20,8 +20,9 @@ const PORT = process.env.PORT || 3000;
 // IMPORT MODULES
 const renderHome = require('./modules/home.js');
 const getAirQuality = require('./modules/airQuality');
-const getLocation = require('./modules/location');
+const getLocation = require('./modules/shanelocation');
 const getReviews = require('./modules/restaurants');
+const getAReview = require('./modules/review-detail');
 const getCrime = require('./modules/crime');
 const mapDisplay = require('./modules/map');
 
@@ -46,7 +47,16 @@ app.get('/location', ( req , res ) => {
   })
 });
 
+app.get('/restaurants/:id', getDetail );
 
+async function getDetail( req , res ) {
+  console.log(req.params)
+  const reviewData = await getAReview.getAReview(req.params.id);
+  res.render('../public/views/pages/detail.ejs', {reviewData : reviewData});
+}
+
+// getAReview
+// return res.render('pages/detail', { reviews: reviews });
 function Render(location, aqi, aqiCategory, yelpData, crimeData, mapData) {
   this.location = location;
   this.aqi = aqi;

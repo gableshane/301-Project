@@ -29,5 +29,4 @@ getReviews.getReviews = function(latitude, longitude) {
   })
 };
 
-
 module.exports = getReviews;

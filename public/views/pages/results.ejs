@@ -35,7 +35,7 @@
         <div class="card">
           <img src="<%= review.image_url %>" alt="yelp image" height="100" width="100">
           <div class="container">
-            <h3 class="sub-title"><%= review.name %></h3> 
+            <h3 class="sub-title"><a href="/restaurants/<%= review.id %>"><%= review.name %></a></h3>
             <p>Rating: <%= review.rating %></p>
           </div>
         </div>
