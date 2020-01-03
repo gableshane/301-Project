@@ -12,6 +12,6 @@ mapDisplay.mapDisplay = function (latitude, longitude) {
     let city = response.body.results[0].address_components[4].short_name;
     return {url: `https://maps.googleapis.com/maps/api/staticmap?center=${city}&zoom=10&size=600x400&maptype=roadmap&key=${GEOCODE_API_KEY}`}
   });
-};  
+};
 
 module.exports = mapDisplay;

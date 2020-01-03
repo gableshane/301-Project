@@ -3,7 +3,6 @@
 const cors = require('cors');
 const express = require('express');
 const app = express();
-
 const methodOverride = require('method-override');
 require('dotenv').config();
 
@@ -24,29 +23,30 @@ const getLocation = require('./modules/location');
 const getReviews = require('./modules/restaurants');
 const getCrime = require('./modules/crime');
 const mapDisplay = require('./modules/map');
+const getAReview = require('./modules/review-detail');
 
+// MAIN ROUTE HANDLER
+async function mainHandler ( req , res ) {
+  const userName = req.query.name;
+  const returnLocation = await getLocation.getLocation( req , res );
+  const location = returnLocation.location;
+  const aqData = await getAirQuality( location.lat , location.lng );
+  const reviews = await getReviews.getReviews( location.lat , location.lng );
+  const seattleCrimeData = await getCrime.getCrime();
+  const mapData = await mapDisplay.mapDisplay( location.lat , location.lng );
+  const render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews.data, seattleCrimeData, mapData, userName);
+  res.render('../public/views/pages/results.ejs', { render : render });
+}
 
-// ROUTES
+app.get('/restaurants/:id', getDetail );
 
-app.get('/', renderHome); // SHANE
+async function getDetail( req , res ) {
+  console.log(req.params)
+  const reviewData = await getAReview.getAReview(req.params.id);
+  res.render('../public/views/pages/detail.ejs', {reviewData : reviewData});
+}
 
-app.get('/location', ( req , res ) => {
-  let userName = req.query.name;
-  getLocation.getLocation( req , res ).then( returnLocation => {
-    getAirQuality.getAirQuality(returnLocation.location.lat, returnLocation.location.lng).then( aqData => {
-      getReviews.getReviews(returnLocation.location.lat, returnLocation.location.lng).then( reviews => {
-        getCrime.getCrime().then(seattleCrimeData => {
-          mapDisplay.mapDisplay(returnLocation.location.lat, returnLocation.location.lng).then( mapData => {
-            let render = new Render(returnLocation.name, aqData.data.AQI, aqData.data.Category.Name, reviews.data, seattleCrimeData, mapData, userName);
-            res.render('../public/views/pages/results.ejs', { render : render });
-          })
-        })
-      })
-    })
-  })
-});
-
-
+// CONSTRUCTOR FUNCTION FOR RENDER
 function Render(location, aqi, aqiCategory, yelpData, crimeData, mapData, username) {
   this.location = location;
   this.aqi = aqi;
@@ -56,6 +56,11 @@ function Render(location, aqi, aqiCategory, yelpData, crimeData, mapData, userna
   this.mapData = mapData;
   this.username = username;
 }
+
+// ROUTES
+app.get('/', renderHome);
+app.get('/location', mainHandler );
+
 
 // SERVER LISTENS
 app.listen(PORT, () => {
