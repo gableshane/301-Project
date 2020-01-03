@@ -29,7 +29,7 @@ async function mainHandler ( req , res ) {
   const userName = req.query.name;
   const returnLocation = await getLocation.getLocation( req , res );
   const location = returnLocation.location;
-  const aqData = await getAirQuality.getAirQuality( location.lat , location.lng );
+  const aqData = await getAirQuality( location.lat , location.lng );
   const reviews = await getReviews.getReviews( location.lat , location.lng );
   const seattleCrimeData = await getCrime.getCrime();
   const mapData = await mapDisplay.mapDisplay( location.lat , location.lng );
