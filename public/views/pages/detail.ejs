@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="../styles/base.css">
   <link rel="stylesheet" type="text/css" href="../styles/layout.css">
   <link rel="stylesheet" type="text/css" href="../styles/modules.css">
+  <link rel="stylesheet" type="text/css" href="../styles/detail.css">
   <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap" rel="stylesheet">
   <title>Detail</title>
 </head>
@@ -15,12 +16,19 @@
     <h2>Results</h2>
   </header>
   <main>
-    <h2>Detail PAGE</h2>
-    <p><%= reviewData.user.name %></p>
-    <p>Rating: <%= reviewData.rating %></p>
-    <p>Date: <%= reviewData.time_created.split(' ')[0] %></p>
-    <p>Reason: <%= reviewData.text %></p>
-    <p><a href="<%= reviewData.url%>">Click to view original text</a></p>
+    <h1>The Worst Review</h1>
+    <div id="detail-container">
+      <div id="left-content">
+        <p id="name"><%= reviewData.user.name %></p>
+        <p>Rating: <%= reviewData.rating %></p>
+        <p>Date: <%= reviewData.time_created.split(' ')[0] %></p>
+      </div>
+      <div id="right-content">
+        <p id="reason">Reason:</p>
+        <p><%= reviewData.text %></p>
+        <p id="yelp_link"><a href="<%= reviewData.url%>">Click to view original text</a></p>
+      </div>
+    </div>
   </main>
   <footer>
   <%- include('../partials/footer.ejs') %>

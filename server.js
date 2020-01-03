@@ -41,7 +41,6 @@ async function mainHandler ( req , res ) {
 app.get('/restaurants/:id', getDetail );
 
 async function getDetail( req , res ) {
-  console.log(req.params)
   const reviewData = await getAReview.getAReview(req.params.id);
   res.render('../public/views/pages/detail.ejs', {reviewData : reviewData});
 }
