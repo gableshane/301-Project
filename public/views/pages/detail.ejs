@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="../styles/reset.css">
+  <link rel="stylesheet" type="text/css" href="../styles/base.css">
+  <link rel="stylesheet" type="text/css" href="../styles/layout.css">
+  <link rel="stylesheet" type="text/css" href="../styles/modules.css">
+  <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+  <title>Detail</title>
+</head>
+<body>
+  <header>
+    <%- include('../partials/nav.ejs') %>
+    <h2>Results</h2>
+  </header>
+  <main>
+    <h2>Detail PAGE</h2>
+    <p><%= reviewData.user.name %></p>
+    <p>Rating: <%= reviewData.rating %></p>
+    <p>Date: <%= reviewData.time_created.split(' ')[0] %></p>
+    <p>Reason: <%= reviewData.text %></p>
+    <p><a href="<%= reviewData.url%>">Click to view original text</a></p>
+  </main>
+  <footer>
+  <%- include('../partials/footer.ejs') %>
+  </footer>
+</body>
+</html>

@@ -38,7 +38,7 @@ getLocation.getLocation = async function ( req , res ) {
   }
   if (locationData.name) {
     console.log('-------Get location via DB');
-      return await locationData;
+      return locationData;
     }
   let result = await superagent.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=${GEOCODE_API_KEY}`);
   locationData.name = result.body.results[0].address_components[0].short_name.toLowerCase();
