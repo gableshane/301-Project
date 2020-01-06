@@ -1,0 +1,43 @@
+main {
+  text-align: center;
+}
+
+#detail-container {
+  width: 65%;
+  border-bottom: 6px solid red;
+  background-color: lightgrey;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  margin-left: 220px;
+}
+
+#left-content {
+  float: left;
+  width: 30%;
+}
+
+#name {
+  font-size: 2.2em;
+  border: 6px rgb(124, 97, 46) solid;
+  border-radius: 25px;
+
+}
+
+#reason {
+  text-decoration: underline;
+}
+
+#right-content {
+  float: right;
+  width: 50%;
+}
+
+p {
+  font-size: 2em;
+  padding: 0.5em;
+}
+
+#yelp_link {
+  text-align: right;
+}
